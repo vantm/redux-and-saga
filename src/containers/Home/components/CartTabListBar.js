@@ -22,7 +22,7 @@ function CartTabListBar({ selectedTabId, tabOptions, onTabChange, onAddTab }) {
         }}
         key={-1}
         value={null}
-        style={{ width: 32 }}
+        style={{ width: '72px', minWidth: '72px' }}
       />
     </Tabs>
   );
