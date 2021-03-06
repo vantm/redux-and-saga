@@ -1,51 +1,78 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { remove } from 'lodash';
+import { createSlice, createAction } from '@reduxjs/toolkit';
+import { last, remove, valuesIn } from 'lodash';
 import { v4 as uuid } from 'uuid';
 
+function getLabel() {
+  const now = new Date();
+  return `Order #${now.getDate()}${now.getHours()}${now.getMinutes()}${now.getSeconds()}`;
+}
+
+const name = 'cart';
+
+const requestNewCart = createAction(`${name}/requestNewCart`);
+const requestAddToCart = createAction(`${name}/requestAddToCart`);
+
 export const cartSlice = createSlice({
-  name: 'cart',
+  name,
   initialState: {
-    allProductIds: [],
-    products: {},
-    allTabIds: [],
-    tabs: {},
-    tabId: null
+    allIds: [],
+    byIds: {},
+    selectedCartId: null,
+    refs: {}
   },
   reducers: {
-    addTab: (state) => {
-      const now = new Date();
-      const tab = {
+    addCart: (state, { payload: label }) => {
+      const cart = {
         id: uuid(),
-        label: `ORDER #${now.getDate()}${now.getHours()}${now.getMinutes()}${now.getSeconds()}`,
-        discount: 0
+        label: label ?? getLabel(),
+        discount: 0,
+        items: {}
       };
-      state.allTabIds.push(tab.id);
-      state.tabs[tab.id] = tab;
-      state.tabId = tab.id;
+      state.allIds.push(cart.id);
+      state.byIds[cart.id] = cart;
+      state.selectedCartId = cart.id;
     },
-    removeTab: (state, id) => {
-      remove(state.tabs, (x) => x.id === id);
-      state.tabs[id] = undefined;
-      state.tabId = state.allTabIds[state.allTabIds.length - 1];
+    removeCart: (state, { payload: id }) => {
+      remove(state.allIds, (x) => x.id === id);
+      state.byIds[id] = undefined;
+      state.selectedCartId = last(state.allIds);
     },
-    activeTab: (state, id) => {
-      if (state.tabs[id]) {
-        state.tabId = id;
+    activeCart: (state, { payload: id }) => {
+      if (state.byIds[id]) {
+        state.selectedCartId = id;
       }
     },
-    setDiscount: (state, value) => {
-      const tab = state.tabs[state.tabId];
-      if (tab) {
-        tab.discount = value;
+    addToCart: (state, { payload: { id, product, quantity } }) => {
+      if (state.byIds[id]) {
+        state.refs[product.id] = product;
+
+        const qty = state.byIds[id].items[product.id]?.quantity ?? 0;
+
+        state.byIds[id].items[product.id] = {
+          id: product.id,
+          quantity: quantity + qty
+        };
       }
     }
   }
 });
 
-export const cartActions = cartSlice.actions;
+export const cartActions = {
+  ...cartSlice.actions,
+  requestNewCart,
+  requestAddToCart
+};
 
-export const getTabs = ({ cart }) => Object.values(cart.tabs);
-export const getTab = ({ cart }) => cart.tabs[cart.tabId];
-export const getTabId = ({ cart }) => cart.tabId;
+export const getCarts = ({ cart }) => Object.values(cart.byIds);
+export const getSelectedCartId = ({ cart }) => cart.selectedCartId;
+export const getProductsInSelectedCart = ({ cart }) =>
+  getProducts({ cart }, cart.selectedCartId);
+export const getProduct = ({ cart }, productId) => cart.refs[productId];
+export const getProducts = ({ cart }, cartId) => {
+  return valuesIn(cart.byIds[cartId]?.items).map((x) => ({
+    ...x,
+    ...cart.refs[x.id]
+  }));
+};
 
 export default cartSlice.reducer;

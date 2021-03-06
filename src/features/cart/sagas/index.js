@@ -1,6 +1,7 @@
 import { all } from 'redux-saga/effects';
-import helloWorld from './helloWorld';
+import addToCart from './addToCart';
+import newCart from './newCart';
 
 export default function* cartSaga() {
-  yield all([helloWorld()]);
+  yield all([newCart(), addToCart()]);
 }
