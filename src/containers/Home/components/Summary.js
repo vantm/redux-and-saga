@@ -7,8 +7,16 @@ import { cartActions } from 'features/cart/cartSlice';
 
 function Summary() {
   return (
-    <Box height="100%" component={Paper} variant="outlined" square padding={2}>
-      <Box marginBottom={1}>
+    <Box
+      height="100%"
+      display="flex"
+      flexDirection="column"
+      component={Paper}
+      variant="outlined"
+      square
+      padding={2}
+    >
+      <Box marginBottom={1} flexGrow={1}>
         <Typography>Subtotal: {0}</Typography>
         <Typography>Discount: {0}</Typography>
         <Typography>GrandTotal: {0}</Typography>

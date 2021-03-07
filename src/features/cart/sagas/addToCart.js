@@ -5,10 +5,10 @@ import { isNil } from 'lodash';
 
 export default function* addToCart() {
   while (true) {
-    const selectedId = yield select(getSelectedCartId);
     const { payload: productId, quantity } = yield take(
       cartActions.requestAddToCart.type
     );
+    const selectedId = yield select(getSelectedCartId);
     let product = yield select(getProduct, productId);
 
     if (!product) {

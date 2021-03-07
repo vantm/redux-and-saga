@@ -2,14 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Box, Paper, Tab, Tabs } from '@material-ui/core';
+import {
+  Box,
+  IconButton,
+  Paper,
+  Tab,
+  Tabs,
+  Typography
+} from '@material-ui/core';
+import { HighlightOff as RemoveIcon } from '@material-ui/icons';
 import {
   getSelectedCartId,
   getCarts,
   cartActions
 } from 'features/cart/cartSlice';
 
-function CartTabs({ selectedCartId, carts, activeCart }) {
+function CartTabs({ selectedCartId, carts, activeCart, removeCart }) {
   return (
     <Box component={Paper} variant="outlined" square>
       <Tabs
@@ -23,7 +31,22 @@ function CartTabs({ selectedCartId, carts, activeCart }) {
           <Tab
             key={index}
             onClick={() => activeCart?.(id)}
-            label={label}
+            label={
+              <Box display="flex" alignItems="center">
+                <Box marginRight={1}>
+                  <Typography>{label}</Typography>
+                </Box>
+                <IconButton
+                  size="small"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeCart?.(id);
+                  }}
+                >
+                  <RemoveIcon />
+                </IconButton>
+              </Box>
+            }
             value={id}
           />
         ))}
@@ -40,7 +63,8 @@ CartTabs.propTypes = {
       label: PropTypes.string.isRequired
     })
   ),
-  activeCart: PropTypes.func
+  activeCart: PropTypes.func,
+  removeCart: PropTypes.func
 };
 
 function mapStateToProps(state) {
