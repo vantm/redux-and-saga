@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -19,14 +19,7 @@ import {
   getSubtotalByCart
 } from 'features/cart/cartSlice';
 
-function CartSummary({
-  selectedCartId,
-  subtotal,
-  discount,
-  debouncedSetDiscount
-}) {
-  const [discountValue, setDiscountValue] = useState();
-
+function CartSummary({ selectedCartId, subtotal, discount, setDiscount }) {
   return (
     <Box
       height="100%"
@@ -49,10 +42,8 @@ function CartSummary({
                 <TextField
                   type="number"
                   inputMode="numeric"
-                  value={discountValue}
                   onChange={(e) => {
-                    setDiscountValue(e.target.valueAsNumber);
-                    debouncedSetDiscount?.({
+                    setDiscount?.({
                       id: selectedCartId,
                       discount: e.target.valueAsNumber
                     });
@@ -84,7 +75,7 @@ CartSummary.propTypes = {
   selectedCartId: PropTypes.string,
   subtotal: PropTypes.number,
   discount: PropTypes.number,
-  debouncedSetDiscount: PropTypes.func
+  setDiscount: PropTypes.func
 };
 
 function mapStateToProps(state) {

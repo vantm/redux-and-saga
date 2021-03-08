@@ -48,8 +48,13 @@ function ProductTable({ selectedCartId, value, removeFromCart, setQuantity }) {
               <TableCell align="right">
                 <TextField
                   value={row.quantity}
-                  type="number"
-                  inputMode="numeric"
+                  onChange={(e) =>
+                    setQuantity?.({
+                      id: selectedCartId,
+                      productId: row.id,
+                      quantity: e.target.valueAsNumber
+                    })
+                  }
                   InputProps={{
                     startAdornment: (
                       <InputAdornment>
@@ -84,6 +89,8 @@ function ProductTable({ selectedCartId, value, removeFromCart, setQuantity }) {
                       </InputAdornment>
                     )
                   }}
+                  type="number"
+                  inputMode="numeric"
                   inputProps={{
                     style: { textAlign: 'right', width: '60px' }
                   }}
@@ -119,7 +126,8 @@ ProductTable.propTypes = {
       quantity: PropTypes.number.isRequired
     })
   ),
-  removeFromCart: PropTypes.func
+  removeFromCart: PropTypes.func,
+  setQuantity: PropTypes.func
 };
 
 function mapStateToProps(state) {

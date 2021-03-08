@@ -13,7 +13,6 @@ const name = 'cart';
 
 const requestNewCart = createAction(`${name}/requestNewCart`);
 const addToSelectedCart = createAction(`${name}/addToSelectedCart`);
-const debouncedSetDiscount = createAction(`${name}/debouncedSetDiscount`);
 
 export const cartSlice = createSlice({
   name,
@@ -80,8 +79,7 @@ export const cartSlice = createSlice({
 export const cartActions = {
   ...cartSlice.actions,
   requestNewCart,
-  addToSelectedCart,
-  debouncedSetDiscount
+  addToSelectedCart
 };
 
 export default cartSlice.reducer;
