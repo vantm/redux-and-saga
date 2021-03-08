@@ -6,7 +6,9 @@ dependencies:
   '@testing-library/jest-dom': 4.2.4
   '@testing-library/react': 9.5.0_react-dom@17.0.1+react@17.0.1
   '@testing-library/user-event': 7.2.1
+  eventemitter3: 4.0.7
   lodash: 4.17.21
+  notistack: 1.0.5_c640d2d0176bfcab1d99b942ffa7ebe7
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
   react-redux: 7.2.2_react-dom@17.0.1+react@17.0.1
@@ -8467,6 +8469,20 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
+  /notistack/1.0.5_c640d2d0176bfcab1d99b942ffa7ebe7:
+    dependencies:
+      '@material-ui/core': 4.11.3_react-dom@17.0.1+react@17.0.1
+      clsx: 1.1.1
+      hoist-non-react-statics: 3.3.2
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+    dev: false
+    peerDependencies:
+      '@material-ui/core': ^4.0.0
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    resolution:
+      integrity: sha512-xCMG0OhzEdczmDs2lDABEiphKQMZUavdOIRAJhfIcyJkCA4UqBDANL3YCLt+mz8VbAPCeKTn76kbCmYQIqksnA==
   /npm-run-path/2.0.2:
     dependencies:
       path-key: 2.0.1
@@ -12824,7 +12840,9 @@ specifiers:
   '@testing-library/jest-dom': ^4.2.4
   '@testing-library/react': ^9.3.2
   '@testing-library/user-event': ^7.1.2
+  eventemitter3: ^4.0.7
   lodash: ^4.17.21
+  notistack: ^1.0.5
   react: ^17.0.1
   react-dom: ^17.0.1
   react-redux: ^7.1.3

@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid } from '@material-ui/core';
 import Empty from 'containers/layouts/Empty';
 import CartTopAppBar from 'features/cart/CartTopAppBar';
 import CartTabs from 'features/cart/CartTabs';
 import CartProductList from 'features/cart/CartProductList';
 import CartSummary from 'features/cart/CartSummary';
+import eventBus from 'common/eventBus';
 
 function Home() {
+  useEffect(() => {
+    eventBus.notifyInfo('Hello World!');
+  }, []);
+
   return (
     <Empty>
       <CartTopAppBar />

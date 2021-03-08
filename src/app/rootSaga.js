@@ -1,8 +1,9 @@
 import { all, spawn, call } from 'redux-saga/effects';
 import cartSaga from 'features/cart/sagas';
+import webIntegrationSaga from 'features/webIntegration/sagas';
 
 export default function* rootSaga() {
-  const sagas = [cartSaga];
+  const sagas = [cartSaga, webIntegrationSaga];
 
   yield all(
     sagas.map((saga) =>
@@ -12,7 +13,7 @@ export default function* rootSaga() {
             yield call(saga);
             break;
           } catch (e) {
-            console.error('Saga call error!', e);
+            console.error(`Saga error: ${e.message}`, e);
           }
         }
       })
