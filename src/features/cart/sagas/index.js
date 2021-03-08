@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
-import addToCart from './addToCart';
-import newCart from './newCart';
-import removeFromCart from './removeFromCart';
+import addToSelectedCart from './addToSelectedCart';
+import debouncedSetDiscount from './debounceSetDiscount';
+import requestNewCart from './requestNewCart';
 
 export default function* cartSaga() {
-  yield all([newCart(), addToCart(), removeFromCart()]);
+  yield all([requestNewCart(), addToSelectedCart(), debouncedSetDiscount()]);
 }

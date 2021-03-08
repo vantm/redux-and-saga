@@ -11,14 +11,14 @@ import productApi from 'api/product';
 
 const allProducts = productApi.list();
 
-function TopAppBar({ requestNewCart, requestAddToCart }) {
+function TopAppBar({ requestNewCart, addToSelectedCart }) {
   return (
     <AppBar elevation={0} position="static">
       <Toolbar>
         <Box>
           <Autocomplete
             onChange={(_, newValue) => {
-              requestAddToCart(newValue.id, 1);
+              addToSelectedCart(newValue.id);
             }}
             options={allProducts}
             getOptionLabel={(x) => x.name}
@@ -57,7 +57,7 @@ function TopAppBar({ requestNewCart, requestAddToCart }) {
 
 TopAppBar.propTypes = {
   requestNewCart: PropTypes.func,
-  requestAddToCart: PropTypes.func
+  addToSelectedCart: PropTypes.func
 };
 
 function mapStateToProps(state) {
