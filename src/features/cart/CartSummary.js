@@ -19,7 +19,12 @@ import {
   getSubtotalByCart
 } from 'features/cart/cartSlice';
 
-function Summary({ selectedCartId, subtotal, discount, debouncedSetDiscount }) {
+function CartSummary({
+  selectedCartId,
+  subtotal,
+  discount,
+  debouncedSetDiscount
+}) {
   const [discountValue, setDiscountValue] = useState();
 
   return (
@@ -75,7 +80,7 @@ function Summary({ selectedCartId, subtotal, discount, debouncedSetDiscount }) {
   );
 }
 
-Summary.propTypes = {
+CartSummary.propTypes = {
   selectedCartId: PropTypes.string,
   subtotal: PropTypes.number,
   discount: PropTypes.number,
@@ -96,4 +101,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(cartActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Summary);
+export default connect(mapStateToProps, mapDispatchToProps)(CartSummary);

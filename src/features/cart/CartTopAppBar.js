@@ -11,7 +11,7 @@ import productApi from 'api/product';
 
 const allProducts = productApi.list();
 
-function TopAppBar({ requestNewCart, addToSelectedCart }) {
+function CartTopAppBar({ requestNewCart, addToSelectedCart }) {
   return (
     <AppBar elevation={0} position="static">
       <Toolbar>
@@ -55,7 +55,7 @@ function TopAppBar({ requestNewCart, addToSelectedCart }) {
   );
 }
 
-TopAppBar.propTypes = {
+CartTopAppBar.propTypes = {
   requestNewCart: PropTypes.func,
   addToSelectedCart: PropTypes.func
 };
@@ -68,4 +68,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(cartActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopAppBar);
+export default connect(mapStateToProps, mapDispatchToProps)(CartTopAppBar);

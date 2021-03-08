@@ -1,15 +1,15 @@
 import React from 'react';
 import { Box, Grid } from '@material-ui/core';
 import Empty from 'containers/layouts/Empty';
-import TopAppBar from 'features/cart/TopAppBar';
+import CartTopAppBar from 'features/cart/CartTopAppBar';
 import CartTabs from 'features/cart/CartTabs';
-import ProductTable from 'features/cart/ProductTable';
-import Summary from 'features/cart/Summary';
+import CartProductList from 'features/cart/CartProductList';
+import CartSummary from 'features/cart/CartSummary';
 
 function Home() {
   return (
     <Empty>
-      <TopAppBar />
+      <CartTopAppBar />
       <Box marginBottom={1} />
       <Box marginBottom={1}>
         <CartTabs />
@@ -17,10 +17,10 @@ function Home() {
       <Box marginBottom={1}>
         <Grid container spacing={1}>
           <Grid item xs={12} md={7} lg={8}>
-            <ProductTable />
+            <CartProductList />
           </Grid>
           <Grid item xs={12} md={5} lg={4}>
-            <Summary />
+            <CartSummary />
           </Grid>
         </Grid>
       </Box>
