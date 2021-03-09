@@ -1,21 +1,19 @@
 import React from 'react';
-import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from 'app/Routes';
-import appTheme from 'app/appTheme';
 import NotificationFeature from 'features/notification/NotificationFeature';
+import withThemeSwitcher from 'features/theme/hocs/withThemeSwitcher';
 
 function App() {
   return (
-    <ThemeProvider theme={appTheme}>
-      <NotificationFeature>
-        <CssBaseline />
-        <Router>
-          <Routes />
-        </Router>
-      </NotificationFeature>
-    </ThemeProvider>
+    <NotificationFeature>
+      <CssBaseline />
+      <Router>
+        <Routes />
+      </Router>
+    </NotificationFeature>
   );
 }
 
-export default App;
+export default withThemeSwitcher(App);

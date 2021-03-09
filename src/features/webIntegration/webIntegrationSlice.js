@@ -11,7 +11,7 @@ export const webIntegrationSlice = createSlice({
   reducers: {}
 });
 
-export const cartActions = {
+export const webIntegrationActions = {
   ...webIntegrationSlice.actions
 };
 
