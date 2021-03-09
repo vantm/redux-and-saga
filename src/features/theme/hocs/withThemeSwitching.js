@@ -1,22 +1,19 @@
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-const darkTheme = createMuiTheme({
-  palette: {
-    type: 'dark'
-  }
-});
-
-const lightTheme = createMuiTheme({
-  palette: {
-    type: 'light'
-  }
-});
-
-function withThemeSwitcher(Component) {
+function withThemeSwitching(Component) {
   return function (props) {
     const themeName = useSelector((state) => state.theme.value);
-    const theme = themeName === 'dark' ? darkTheme : lightTheme;
+    const theme = useMemo(
+      () =>
+        createMuiTheme({
+          palette: {
+            type: themeName
+          }
+        }),
+      [themeName]
+    );
 
     return (
       <ThemeProvider theme={theme}>
@@ -26,4 +23,4 @@ function withThemeSwitcher(Component) {
   };
 }
 
-export default withThemeSwitcher;
+export default withThemeSwitching;

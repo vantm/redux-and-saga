@@ -9,7 +9,7 @@ export const theme = createSlice({
   name: featureName,
   initialState,
   reducers: {
-    change: (state, { payload: value }) => {
+    changeTheme: (state, { payload: value }) => {
       state.value = value;
     }
   }

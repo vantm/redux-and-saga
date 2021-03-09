@@ -3,7 +3,7 @@ import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from 'app/Routes';
 import NotificationFeature from 'features/notification/NotificationFeature';
-import withThemeSwitcher from 'features/theme/hocs/withThemeSwitcher';
+import withThemeSwitching from 'features/theme/hocs/withThemeSwitching';
 
 function App() {
   return (
@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export default withThemeSwitcher(App);
+export default withThemeSwitching(App);

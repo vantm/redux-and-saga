@@ -5,8 +5,8 @@ import {
   getProductById,
   countByCart
 } from '../cartSlice';
-import productApi from 'api/product';
 import { isNil } from 'lodash';
+import productApi from 'api/product';
 import requestNewCart from './requestNewCart';
 
 function* _addToCart(productId, quantity) {

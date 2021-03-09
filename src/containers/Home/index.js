@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { Box, Grid } from '@material-ui/core';
+import { AppBar, Box, Grid, Toolbar } from '@material-ui/core';
 import Empty from 'containers/layouts/Empty';
-import CartTopAppBar from 'features/cart/CartTopAppBar';
 import CartTabs from 'features/cart/CartTabs';
 import CartProductList from 'features/cart/CartProductList';
 import CartSummary from 'features/cart/CartSummary';
 import eventBus from 'common/eventBus';
+import ProductFilterInput from 'features/cart/ProductFilterInput';
+import ButtonAddNewCart from 'features/cart/ButtonAddNewCart';
+import ButtonThemeSwitching from 'features/theme/ButtonThemeSwitching';
 
 function Home() {
   useEffect(() => {
@@ -14,7 +16,18 @@ function Home() {
 
   return (
     <Empty>
-      <CartTopAppBar />
+      <AppBar elevation={0} position="static">
+        <Toolbar>
+          <Box>
+            <ProductFilterInput />
+          </Box>
+          <Box flexGrow={1} />
+          <Box>
+            <ButtonThemeSwitching />
+            <ButtonAddNewCart />
+          </Box>
+        </Toolbar>
+      </AppBar>
       <Box marginBottom={1} />
       <Box marginBottom={1}>
         <CartTabs />
