@@ -1,5 +1,6 @@
 export const APP_FOCUSED_EVENT = `@app/focused`;
 export const APP_BLURRED_EVENT = `@app/blurred`;
+export const APP_INTERVAL_5MIN_EVENT = `@app/interval/5min`;
 export const APP_NOTIFIED_EVENT = `@app/notified`;
 export const APP_CLOSE_NOTIFICATION_EVENT = `@app/close-notification`;
 

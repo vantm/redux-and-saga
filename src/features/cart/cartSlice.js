@@ -1,5 +1,14 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
-import { last } from 'lodash';
+import {
+  difference,
+  flatten,
+  forEach,
+  keys,
+  last,
+  map,
+  union,
+  values
+} from 'lodash';
 import { v4 as uuid } from 'uuid';
 
 export * from './selectors';
@@ -30,13 +39,16 @@ export const cartSlice = createSlice({
         discount: 0,
         items: {}
       };
+
       state.allIds.push(cart.id);
       state.byId[cart.id] = cart;
       state.selectedCartId = cart.id;
     },
     removeCart: (state, { payload: id }) => {
       delete state.byId[id];
+
       state.allIds = state.allIds.filter((x) => x !== id);
+
       if (id === state.selectedCartId) {
         state.selectedCartId = last(state.allIds);
       }
@@ -63,7 +75,6 @@ export const cartSlice = createSlice({
         return;
       }
 
-      // TODO: Remove refs as well
       delete state.byId[id].items[productId];
     },
     setQuantity: (state, { payload: { id, productId, quantity } }) => {
@@ -72,6 +83,15 @@ export const cartSlice = createSlice({
       }
 
       state.byId[id].items[productId].quantity = quantity <= 0 ? 0 : quantity;
+    },
+    cleanRefs: (state) => {
+      const itemIds = union(
+        flatten(map(values(state.byId), (x) => keys(x.items)))
+      );
+      const refIds = keys(state.refs);
+      const ids = difference(refIds, itemIds);
+
+      forEach(ids, (id) => delete state.refs[id]);
     }
   }
 });
